@@ -1,0 +1,11 @@
+.App {
+  margin-top: 20px;
+}
+.App-header {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.App-main {
+  padding: 20px 10px;
+}
