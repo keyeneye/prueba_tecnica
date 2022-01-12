@@ -1,4 +1,5 @@
-import React, { FC } from "react";
+import { FC } from "react";
+import "./EmployeeList.css";
 
 const EmployeeList: FC<{ searchedEmployees: Array<any>; render: any }> = ({
   searchedEmployees,

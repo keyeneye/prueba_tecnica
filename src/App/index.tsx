@@ -40,8 +40,12 @@ function App() {
         <EmployeeButton openModal={openModal} setOpenModal={setOpenModal} />
       </main>
       {openModal && (
-        <Modal>
-          <EmployeeForm createEmployee={createEmployee} />
+        <Modal openModal={openModal} setOpenModal={setOpenModal}>
+          <EmployeeForm
+            openModal={openModal}
+            setOpenModal={setOpenModal}
+            createEmployee={createEmployee}
+          />
         </Modal>
       )}
     </div>

@@ -1,4 +1,6 @@
 import { FC } from "react";
+import { FaTrashAlt } from "react-icons/fa";
+import "./EmployeeItem.css";
 
 const EmployeeItem: FC<{
   name: string;
@@ -15,15 +17,21 @@ const EmployeeItem: FC<{
   return (
     <>
       <div className="EmployeeItem">
-        <img src={img} alt={name} />
-        <div>
-          <h3>{name}</h3>
-          <h3>{email}</h3>
-          <h3>{telephone}</h3>
+        <img className="EmployeeItem__image" src={img} alt={name} />
+        <div className="EmployeeItem__description">
+          <div className="EmployeeItem__description__text">
+            <p>{name}</p>
+            <p>{email}</p>
+            <p>{telephone}</p>
+          </div>
+          <button
+            className="EmployeeItem__button"
+            type="button"
+            onClick={deleteItem}
+          >
+            <FaTrashAlt />
+          </button>
         </div>
-        <button type="button" onClick={deleteItem}>
-          Delete
-        </button>
       </div>
     </>
   );

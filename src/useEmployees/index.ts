@@ -23,7 +23,6 @@ function useEmployees() {
     try {
       await axios.get(urlBase).then((response) => {
         const { data } = response;
-        console.log(data.employee);
         setEmployees(data.employee.filter((info: any) => info.state));
         // setEmployees(data.employee);
       });
@@ -47,8 +46,6 @@ function useEmployees() {
       .post(urlBase, formData)
       .then((response) => {
         const { data } = response;
-        console.log(data.employee);
-        // return data.employee;
         setEmployees([...employees, data.employee]);
       })
       .catch((error) => {
@@ -60,7 +57,6 @@ function useEmployees() {
   const deleteEmployee = async (id: string) => {
     try {
       await axios.delete(urlBase + id).then((response) => {
-        console.log(response);
         getEmployees();
       });
     } catch (error) {
