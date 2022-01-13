@@ -2,7 +2,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
-const urlBase = "http://localhost:8080/api/employee/";
+const urlBase = "https://prueba-tecnica-brive.herokuapp.com/api/employee/";
 
 function useEmployees() {
   const [employees, setEmployees] = useState<any>([]);
