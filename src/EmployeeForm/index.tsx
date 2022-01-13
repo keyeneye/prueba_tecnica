@@ -51,11 +51,13 @@ const EmployeeForm: FC<{
         onChange={(e) => setName(e.target.value)}
         type="text"
         placeholder="Nombre"
+        maxLength={80}
       />
       <input
         onChange={(e) => setEmail(e.target.value)}
         type="email"
         placeholder="Correo"
+        maxLength={80}
       />
       <input
         onChange={(e) => setTelephone(e.target.value)}

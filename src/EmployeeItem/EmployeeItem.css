@@ -45,6 +45,10 @@
 .EmployeeItem__description__text > p {
   font-size: 1.1rem;
   font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 280px;
 }
 .EmployeeItem__button {
   background-color: #cd1818;
