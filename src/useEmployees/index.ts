@@ -2,10 +2,11 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
+import { iEmployee } from "../@Types/index";
 const urlBase = "https://prueba-tecnica-brive.herokuapp.com/api/employee/";
 
 function useEmployees() {
-  const [employees, setEmployees] = useState<any>([]);
+  const [employees, setEmployees] = useState<Array<iEmployee>>([]);
   const [search, setSearch] = useState("");
   const [openModal, setOpenModal] = useState(false);
 
@@ -14,10 +15,10 @@ function useEmployees() {
     searchedEmployees = employees;
   } else {
     searchedEmployees = employees
-      .filter((employee: any) =>
+      .filter((employee: iEmployee) =>
         employee.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
       )
-      .filter((employee: any) => employee.state);
+      .filter((employee: iEmployee) => employee.state);
   }
 
   const getEmployees = async () => {
@@ -30,7 +31,7 @@ function useEmployees() {
     try {
       await axios.get(urlBase).then((response) => {
         const { data } = response;
-        setEmployees(data.employee.filter((info: any) => info.state));
+        setEmployees(data.employee.filter((info: iEmployee) => info.state));
         Swal.close();
         return { response };
       });
@@ -47,10 +48,10 @@ function useEmployees() {
   };
 
   const createEmployee = async (
-    name: any,
-    email: any,
-    telephone: any,
-    file: any
+    name: string,
+    email: string,
+    telephone: string,
+    file: File
   ) => {
     Swal.fire({
       title: "Cargando...",

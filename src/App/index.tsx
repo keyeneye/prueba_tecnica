@@ -6,6 +6,7 @@ import { EmployeeItem } from "../EmployeeItem";
 import { EmployeeButton } from "../EmployeeButton";
 import { Modal } from "../Modal";
 import { EmployeeForm } from "../EmployeeForm";
+import { iEmployee } from "../@Types/index";
 
 function App() {
   const {
@@ -25,7 +26,7 @@ function App() {
       <main className="App-main">
         <EmployeeList
           searchedEmployees={searchedEmployees}
-          render={(employee: any) => (
+          render={(employee: iEmployee) => (
             <EmployeeItem
               key={employee._id}
               name={employee.name}

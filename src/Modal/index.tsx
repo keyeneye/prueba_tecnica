@@ -1,7 +1,12 @@
+import { FC } from "react";
 import ReactDOM from "react-dom";
 import "./Modal.css";
 
-function Modal({ children, openModal, setOpenModal }: any) {
+const Modal: FC<{
+  children: React.ReactNode;
+  openModal: boolean;
+  setOpenModal: Function;
+}> = ({ children, openModal, setOpenModal }) => {
   return ReactDOM.createPortal(
     openModal && (
       <div className="modal-wrapper" onClick={() => setOpenModal(false)}>
@@ -15,6 +20,6 @@ function Modal({ children, openModal, setOpenModal }: any) {
     ),
     document.getElementById("modal") as Element
   );
-}
+};
 
 export { Modal };

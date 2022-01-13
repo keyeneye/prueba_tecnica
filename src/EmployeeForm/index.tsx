@@ -1,5 +1,5 @@
 import "./EmployeeForm.css";
-import { FC, useState } from "react";
+import { FC, useState, KeyboardEvent, FormEvent } from "react";
 import Swal from "sweetalert2";
 
 const EmployeeForm: FC<{
@@ -16,11 +16,13 @@ const EmployeeForm: FC<{
   const [email, setEmail] = useState("");
   const [telephone, setTelephone] = useState("");
   const [file, setFile] = useState();
-  const [imgPreview, setImgPreview] = useState("/no_image.jpg");
+  const [imgPreview, setImgPreview] = useState(
+    "https://res.cloudinary.com/db9hozgx2/image/upload/v1642085816/no_image_jeufii.jpg"
+  );
   const onCancel = () => {
     setOpenModal(!openModal);
   };
-  const onSubmit = (e: any) => {
+  const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!name) {
       Swal.fire({
@@ -68,6 +70,15 @@ const EmployeeForm: FC<{
     setFile(file);
     setImgPreview(URL.createObjectURL(file));
   };
+  const onlyNumbers = (e: KeyboardEvent<HTMLDivElement>) => {
+    const pressedKey = e.keyCode || e.which || e.charCode;
+    if (
+      (pressedKey <= 36 || pressedKey >= 40) &&
+      !/^[0-9\b]+$/.test(e.key) &&
+      pressedKey !== 8
+    )
+      e.preventDefault();
+  };
   return (
     <form className="EmployeeForm" onSubmit={onSubmit}>
       <div className="EmployeeForm__container">
@@ -104,6 +115,7 @@ const EmployeeForm: FC<{
       <input
         onChange={(e) => setTelephone(e.target.value)}
         type="tel"
+        onKeyDown={onlyNumbers}
         placeholder="Telefono"
         maxLength={10}
       />
