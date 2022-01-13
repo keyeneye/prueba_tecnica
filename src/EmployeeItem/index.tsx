@@ -11,7 +11,7 @@ const EmployeeItem: FC<{
   deleteEmployee: Function;
 }> = ({ name, email, telephone, img, id, deleteEmployee }) => {
   const deleteItem = () => {
-    deleteEmployee(id);
+    deleteEmployee(id, name);
   };
 
   return (

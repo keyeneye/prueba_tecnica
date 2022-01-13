@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from "axios";
 import { useState, useEffect } from "react";
+import Swal from "sweetalert2";
 const urlBase = "http://localhost:8080/api/employee/";
 
 function useEmployees() {
@@ -20,13 +21,27 @@ function useEmployees() {
   }
 
   const getEmployees = async () => {
+    Swal.fire({
+      title: "Cargando...",
+      backdrop: `rgba(0,0,123,0.4) left-top no-repeat`,
+      allowOutsideClick: false,
+      didOpen: () => Swal.showLoading(),
+    });
     try {
       await axios.get(urlBase).then((response) => {
         const { data } = response;
         setEmployees(data.employee.filter((info: any) => info.state));
-        // setEmployees(data.employee);
+        Swal.close();
+        return { response };
       });
     } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Ocurrio un error al conectarse a la BD",
+        confirmButtonColor: "#f58840",
+        confirmButtonText: "Entendido",
+      });
       return error;
     }
   };
@@ -37,6 +52,12 @@ function useEmployees() {
     telephone: any,
     file: any
   ) => {
+    Swal.fire({
+      title: "Cargando...",
+      backdrop: `rgba(0,0,123,0.4) left-top no-repeat`,
+      allowOutsideClick: false,
+      didOpen: () => Swal.showLoading(),
+    });
     let formData = new FormData();
     formData.append("name", name);
     formData.append("email", email);
@@ -47,20 +68,66 @@ function useEmployees() {
       .then((response) => {
         const { data } = response;
         setEmployees([...employees, data.employee]);
+        Swal.close();
+        Swal.fire({
+          icon: "success",
+          title: "Exito",
+          text: data.msg,
+          confirmButtonColor: "#f58840",
+          confirmButtonText: "Entendido",
+        });
       })
       .catch((error) => {
-        console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Ocurrio un error al conectarse a la BD",
+          confirmButtonColor: "#f58840",
+          confirmButtonText: "Entendido",
+        });
         return error;
       });
   };
 
-  const deleteEmployee = async (id: string) => {
-    try {
-      await axios.delete(urlBase + id).then((response) => {
-        getEmployees();
+  const deleteEmployee = async (id: string, name: string) => {
+    const res = await Swal.fire({
+      title: `Seguro que quieres eliminar al empleado "${name}"?`,
+      showDenyButton: true,
+      confirmButtonText: "Eliminar",
+      denyButtonText: "No eliminar",
+      denyButtonColor: "#f58840",
+      confirmButtonColor: "#cd1818",
+      reverseButtons: true,
+      icon: "warning",
+    });
+    if (res.isConfirmed) {
+      Swal.fire({
+        title: "Cargando...",
+        backdrop: `rgba(0,0,123,0.4) left-top no-repeat`,
+        allowOutsideClick: false,
+        didOpen: () => Swal.showLoading(),
       });
-    } catch (error) {
-      console.log(error);
+      try {
+        await axios.delete(urlBase + id).then((response) => {
+          getEmployees();
+          Swal.close();
+          Swal.fire({
+            icon: "success",
+            title: "Exito",
+            text: response.data.msg,
+            confirmButtonColor: "#f58840",
+            confirmButtonText: "Entendido",
+          });
+        });
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Ocurrio un error al conectarse a la BD",
+          confirmButtonColor: "#f58840",
+          confirmButtonText: "Entendido",
+        });
+      }
     }
   };
 
