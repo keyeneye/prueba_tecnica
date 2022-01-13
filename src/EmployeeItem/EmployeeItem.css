@@ -1,0 +1,62 @@
+.EmployeeItem {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  margin-top: 35px;
+  width: 30%;
+}
+.EmployeeItem:hover {
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  transform: scale(1.1);
+}
+@media (max-width: 600px) {
+  .EmployeeItem {
+    width: 100%;
+  }
+}
+
+.EmployeeItem:hover > .EmployeeItem__description {
+  display: flex;
+}
+
+.EmployeeItem__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.EmployeeItem__description {
+  background-color: rgba(255, 255, 255, 0.7);
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  width: 100%;
+  display: none;
+}
+
+.EmployeeItem__description__text {
+  margin-left: 10px;
+}
+.EmployeeItem__description__text > p {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+.EmployeeItem__button {
+  background-color: #cd1818;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  height: 45px;
+  font-size: 25px;
+  margin: auto 5px;
+  padding: 10px;
+}
+.EmployeeItem__button:hover {
+  box-shadow: rgba(205, 24, 24, 0.35) 0px 5px 15px;
+}
